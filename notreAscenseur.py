@@ -39,26 +39,28 @@ class MyTimer:
 class Lift:
     def __init__(self, master):
         self.master = master
-        self.frame = tk.Frame(self.master)
+        self.master.geometry("170x160")
 
         self.CreerEtage()
         self.CreerElevator()
+        self.master.iconbitmap("elevator.ico")
+        self.Etages.master.iconbitmap("elevator.ico")
+        self.Elevator.master.iconbitmap("elevator.ico")
 
-        self.buttonA = tk.Button(self.frame, text = 'Alarm')
-        self.buttonA.pack()
+        self.buttonA = tk.Button(self.master, text = 'Alarm')
+        self.buttonA.pack(fill=tk.X)
 
-        self.button5 = tk.Button(self.frame, text = '5',command=self.Aller5)
-        self.button5.pack()
-        self.button4 = tk.Button(self.frame, text = '4',command=self.Aller4)
-        self.button4.pack()
-        self.button3 = tk.Button(self.frame, text = '3',command=self.Aller3)
-        self.button3.pack()
-        self.button2 = tk.Button(self.frame, text = '2',command=self.Aller2)
-        self.button2.pack()
-        self.button1 = tk.Button(self.frame, text = '1',command=self.Aller1)
-        self.button1.pack()
+        self.button5 = tk.Button(self.master, text = '5',command=self.Aller5)
+        self.button5.pack(fill=tk.X)
+        self.button4 = tk.Button(self.master, text = '4',command=self.Aller4)
+        self.button4.pack(fill='x')
+        self.button3 = tk.Button(self.master, text = '3',command=self.Aller3)
+        self.button3.pack(fill='x')
+        self.button2 = tk.Button(self.master, text = '2',command=self.Aller2)
+        self.button2.pack(fill='x')
+        self.button1 = tk.Button(self.master, text = '1',command=self.Aller1)
+        self.button1.pack(fill='x')
         
-        self.frame.pack()
         
         self.CurTempo=0
         self.master.title('ascenseur')
@@ -416,7 +418,7 @@ class Etages(Lift):
         '''
         self.button5d=tk.Button(self.master,text='5 v',command=Lift.Aller5d)
         self.button5d.place(height=30, width=30, x=30,y=0)
-        self.ind5d= tk.Checkbutton(self.master,state='disabled')
+        self.ind5d= tk.Checkbutton(self.master,selectimage =img,image=img)
         self.ind5d.place(x=70,y=5)
        
        
@@ -505,7 +507,7 @@ class Elevator:
         self.button1.configure(style="Black.TButton")
         self.button1.pack()
 
-        self.master.geometry("+400+200")
+        self.master.geometry("170x170")
 
         self.frame.pack()
 

@@ -229,7 +229,7 @@ class Lift:
         #print (self.curMouvement)
         #print (self.CurEtage)
         #print (self.CurTempo)
-        print (self.target)
+        #print (self.target)
         '''
         if self.CurEtage > 5:
             self.CurEtage=5
@@ -409,8 +409,6 @@ class Etages(Lift):
         
         #print(os.path.dirname(os.path.realpath(__file__)))
         img = tk.PhotoImage(file="on.gif")
-        
-        self.vind5d,self.vind4u,self.vind4d,self.vind3u,self.vind3d,self.vind2u,self.vind2d,self.vind1u = tk.IntVar(),tk.IntVar(),tk.IntVar(),tk.IntVar(),tk.IntVar(),tk.IntVar(),tk.IntVar(),tk.IntVar()
        
         '''
         self.button5u=tk.Button(self.frame,text='5 ^',command=Lift.Aller5)
@@ -418,46 +416,46 @@ class Etages(Lift):
         '''
         self.button5d=tk.Button(self.master,text='5 v',command=Lift.Aller5d)
         self.button5d.place(height=30, width=30, x=30,y=0)
-        self.ind5d= tk.Checkbutton(self.master,state='disabled',variable=self.vind5d)
+        self.ind5d= tk.Checkbutton(self.master,state='disabled')
         self.ind5d.place(x=70,y=5)
        
        
         self.button4u=tk.Button(self.master,text='4 ^',command=Lift.Aller4u)
         self.button4u.place(height=30, width=30, x=30,y=30)
-        self.ind4u= tk.Checkbutton(self.master,state='disabled',variable=self.vind4u)
+        self.ind4u= tk.Checkbutton(self.master,state='disabled')
         self.ind4u.place(x=70,y=35)
         
         self.button4d=tk.Button(self.master,text='4 v',command=Lift.Aller4d)
         self.button4d.place(height=30, width=30, x=30,y=60)
-        self.ind4d= tk.Checkbutton(self.master,state='disabled',variable=self.vind4d)
+        self.ind4d= tk.Checkbutton(self.master,state='disabled')
         self.ind4d.place(x=70,y=65)
 
 
         self.button3u=tk.Button(self.master,text='3 ^',command=Lift.Aller3u)
         self.button3u.place(height=30, width=30, x=30,y=90)
-        self.ind3u= tk.Checkbutton(self.master,state='disabled',variable=self.vind3u)
+        self.ind3u= tk.Checkbutton(self.master,state='disabled')
         self.ind3u.place(x=70,y=95)
     
         self.button3d=tk.Button(self.master,text='3 v',command=Lift.Aller3d)
         self.button3d.place(height=30, width=30, x=30,y=120)
-        self.ind3d= tk.Checkbutton(self.master,state='disabled',variable=self.vind3d)
+        self.ind3d= tk.Checkbutton(self.master,state='disabled')
         self.ind3d.place(x=70,y=125)
         
 
         self.button2u=tk.Button(self.master,text='2 ^',command=Lift.Aller2u)
         self.button2u.place(height=30, width=30, x=30,y=150)
-        self.ind2u= tk.Checkbutton(self.master,state='disabled',variable=self.vind2u)
+        self.ind2u= tk.Checkbutton(self.master,state='disabled')
         self.ind2u.place(x=70,y=155)
         
         self.button2d=tk.Button(self.master,text='2 v',command=Lift.Aller2d)
         self.button2d.place(height=30, width=30, x=30,y=180)
-        self.ind2d= tk.Checkbutton(self.master,state='disabled',variable=self.vind2d)
+        self.ind2d= tk.Checkbutton(self.master,state='disabled')
         self.ind2d.place(x=70,y=185)
         
         
         self.button1u=tk.Button(self.master,text='1 ^',command=Lift.Aller1u)
         self.button1u.place(height=30, width=30, x=30,y=210)
-        self.ind1u= tk.Checkbutton(self.master,state='disabled',variable=self.vind1u)
+        self.ind1u= tk.Checkbutton(self.master,state='disabled')
         self.ind1u.place(x=70,y=215)
         '''
         self.button1d=tk.Button(self.frame,text='1 v',command=Lift.Aller1)

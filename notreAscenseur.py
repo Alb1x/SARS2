@@ -46,9 +46,11 @@ class Lift:
             self.master.columnconfigure(i, weight=1)
         self.master.rowconfigure(0, weight=1)
         
-        self.frame_l= tk.Frame(self.master,width=100, height=160)
+        self.frame_l= tk.Frame(self.master,width=100, height=185)
         #pour debuguer
         #self.frame_l.config(highlightbackground="black", highlightthickness=1)
+        self.button_quit = tk.Button(self.frame_l, text= "Exit", command=self.exit)
+        self.button_quit.pack()
         
         self.CreerElevator()
         self.CreerEtage()
@@ -409,6 +411,11 @@ class Lift:
                 self.Elevator.Noir3()
                 self.Elevator.Bleu4()
                 self.Elevator.Orange5()
+                
+    def exit(self):
+        self.master.destroy()  
+        global globstop
+        globstop= 1
 
     def sortir(self):
         global globstop

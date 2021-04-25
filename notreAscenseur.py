@@ -78,6 +78,7 @@ class Lift:
        
         
         self.CurTempo=0
+        self.CurTempoPortes=0
         self.master.title('ascenseur')
         self.CurEtage=1
         self.curMouvement='0'
@@ -243,10 +244,11 @@ class Lift:
 
     def move(self):
         # comment out for exam
-        #print (self.curMouvement)
-        #print (self.CurEtage)
-        #print (self.CurTempo)
-        #print (self.target)
+        #print ("Mouvement : "+str(self.curMouvement))
+        #print ("Etage actuel : "+str(self.CurEtage))
+        #print ("Tempo : "+str(self.CurTempo))
+        #print("Tempo portes : "+str(self.CurTempoPortes))
+        #print ("Liste targets : "+str(self.target))
         '''
         if self.CurEtage > 5:
             self.CurEtage=5
@@ -256,11 +258,18 @@ class Lift:
             self.curMouvement='0'
         '''
         if self.curMouvement == '+' or self.curMouvement=='-' or self.curMouvement== 'p':
-            self.CurTempo=self.CurTempo+1
-        if self.CurTempo == 50 or self.CurTempo==0:
+            self.CurTempoPortes+=1
+            self.CurTempo+=1
             
+        t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
+            
+        
+        if self.CurTempoPortes==int(t_att_po/0.02) or self.CurTempoPortes==0:
             if self.curMouvement=='p':
                 self.curMouvement='0'
+            self.CurTempoPortes=0
+            
+        if self.CurTempo == 50 or self.CurTempo==0:
             
             if len(self.target)>0:
                 if self.curMouvement=='+':

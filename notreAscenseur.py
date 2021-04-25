@@ -217,7 +217,7 @@ class Lift:
         if 1 not in self.target:
             self.target.append(1)
 
-    def turnoff_l(self,etage,_dir):
+    def turnoff_l(self,etage):
         if etage==1:
             self.Etages.ind1u.deselect()
         if etage==2:
@@ -242,7 +242,7 @@ class Lift:
         self.Elevator = Elevator(self.master)
 
     def move(self):
-# comment out for exam
+        # comment out for exam
         #print (self.curMouvement)
         #print (self.CurEtage)
         #print (self.CurTempo)
@@ -266,15 +266,16 @@ class Lift:
                 if self.curMouvement=='+':
                     self.CurEtage=self.CurEtage+1
                     if self.CurEtage==self.target[0]:
-                        self.turnoff_l(self.CurEtage,self.curMouvement)
+                        self.turnoff_l(self.CurEtage)
                         self.curMouvement='p'
                         self.target.pop(0)
                 if self.curMouvement=='-':
                     self.CurEtage=self.CurEtage-1
                     if self.CurEtage==self.target[0]:
-                        self.turnoff_l(self.CurEtage,self.curMouvement)
+                        self.turnoff_l(self.CurEtage)
                         self.curMouvement='p'
                         self.target.pop(0)
+
 
             self.UpdateColor()
             self.CurTempo=0
@@ -289,8 +290,10 @@ class Lift:
                     self.curMouvement='-'
                     self.UpdateColor()
                 if self.target[0]==self.CurEtage:
+                    self.turnoff_l(self.CurEtage)
+                    self.curMouvement='p' #ouverture des portes si l'ascenseur est en attente
                     self.target.pop(0)
-    
+            self.UpdateColor()
                         
     def UpdateColor(self):
 #        print "UpdateColor", self.curMouvement, self.CurEtage

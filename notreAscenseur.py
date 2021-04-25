@@ -46,7 +46,7 @@ class Lift:
             self.master.columnconfigure(i, weight=1)
         self.master.rowconfigure(0, weight=1)
         
-        self.frame_l= tk.Frame(self.master,width=100, height=185)
+        self.frame_l= tk.Frame(self.master,width=100, height=210)
         #pour debuguer
         #self.frame_l.config(highlightbackground="black", highlightthickness=1)
         self.button_quit = tk.Button(self.frame_l, text= "Exit", command=self.exit)
@@ -72,6 +72,8 @@ class Lift:
         self.button2.pack(fill='x')
         self.button1 = tk.Button(self.frame_l, text = '1',command=self.Aller1)
         self.button1.pack(fill='x')
+        self.button_ouvrir = tk.Button(self.frame_l, text = '<< >>',command=self.Ouvrir)
+        self.button_ouvrir.pack(fill='x')
         
         self.frame_l.pack_propagate(0)
         self.frame_l.grid(row=0, column=0)
@@ -82,7 +84,9 @@ class Lift:
         self.master.title('ascenseur')
         self.CurEtage=1
         self.curMouvement='0'
-        self.target=[1]
+        self.target=[]
+        
+        
        
     def Aller5d(self):
         self.Etages.ind5d.select()
@@ -118,10 +122,14 @@ class Lift:
         
         
     def Aller5(self,_dir='n'):
+        if self.CurEtage==5:
+            return
         if 5 not in self.target:
             self.target.append(5)
 
     def Aller4(self,_dir='n'):
+        if self.CurEtage==4:
+            return
         if len(self.target)==0:
                 self.target.append(4)
                 return
@@ -153,6 +161,8 @@ class Lift:
             self.target.append(4)
     
     def Aller3(self,_dir='n'):
+        if self.CurEtage==3:
+            return
         if len(self.target)==0:
                 self.target.append(3)
                 return
@@ -184,6 +194,8 @@ class Lift:
             self.target.append(3)
 
     def Aller2(self,_dir='n'):
+        if self.CurEtage==2:
+            return
         if len(self.target)==0:
                 self.target.append(2)
                 return
@@ -215,6 +227,8 @@ class Lift:
             self.target.append(2)
 
     def Aller1(self,_dir='n'):
+        if self.CurEtage==1:
+            return
         if 1 not in self.target:
             self.target.append(1)
 
@@ -232,6 +246,14 @@ class Lift:
             self.Etages.ind4d.deselect()
         if etage==5:
             self.Etages.ind5d.deselect()
+      
+    #Ouvre la porte si l'ascenseur est à l'arrêt
+    def Ouvrir(self):
+        if self.curMouvement=='0':
+            self.target.insert(0,self.CurEtage)
+        if self.curMouvement=='p':
+            self.CurTempoPortes=0
+        
             
     def CreerEtage(self):
         #self.newWindow = tk.Toplevel(self.master)
@@ -257,9 +279,11 @@ class Lift:
             self.CurEtage=1
             self.curMouvement='0'
         '''
-        if self.curMouvement == '+' or self.curMouvement=='-' or self.curMouvement== 'p':
-            self.CurTempoPortes+=1
+        if self.curMouvement == '+' or self.curMouvement=='-' :
             self.CurTempo+=1
+            
+        if self.curMouvement== 'p':
+            self.CurTempoPortes+=1
             
         t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
             
@@ -303,6 +327,12 @@ class Lift:
                     self.curMouvement='p' #ouverture des portes si l'ascenseur est en attente
                     self.target.pop(0)
             self.UpdateColor()
+            
+        if self.curMouvement== 'p' and self.target:
+            if self.target[0]==self.CurEtage:
+                self.turnoff_l(self.CurEtage)
+                self.target.pop(0)
+            
                         
     def UpdateColor(self):
 #        print "UpdateColor", self.curMouvement, self.CurEtage

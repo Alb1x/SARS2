@@ -39,32 +39,41 @@ class MyTimer:
 class Lift:
     def __init__(self, master):
         self.master = master
-        self.master.geometry("170x160")
+        self.master.title('Ascenseur')
+        self.master.geometry("350x280+500+200")
         
-        #bouton pour quitter
-        self.button_quit = tk.Button(self.master,text="Exit",command=self.sortir)
-        self.button_quit.pack()
-
-        self.CreerEtage()
+        for i in range(3):
+            self.master.columnconfigure(i, weight=1)
+        self.master.rowconfigure(0, weight=1)
+        
+        self.frame_l= tk.Frame(self.master,width=100, height=160)
+        #pour debuguer
+        #self.frame_l.config(highlightbackground="black", highlightthickness=1)
+        
         self.CreerElevator()
-        self.master.iconbitmap("elevator.ico")
-        self.Etages.master.iconbitmap("elevator.ico")
-        self.Elevator.master.iconbitmap("elevator.ico")
+        self.CreerEtage()
         
-        self.buttonA = tk.Button(self.master, text = 'Alarm')
+        self.master.iconbitmap("elevator.ico")
+        #self.Etages.master.iconbitmap("elevator.ico")
+        #self.Elevator.master.iconbitmap("elevator.ico")
+        
+        self.buttonA = tk.Button(self.frame_l, text = 'Alarm')
         self.buttonA.pack()
 
-        self.button5 = tk.Button(self.master, text = '5',command=self.Aller5)
-        self.button5.pack(fill=tk.X)
-        self.button4 = tk.Button(self.master, text = '4',command=self.Aller4)
+        self.button5 = tk.Button(self.frame_l, text = '5',command=self.Aller5)
+        self.button5.pack(fill='x')
+        self.button4 = tk.Button(self.frame_l, text = '4',command=self.Aller4)
         self.button4.pack(fill='x')
-        self.button3 = tk.Button(self.master, text = '3',command=self.Aller3)
+        self.button3 = tk.Button(self.frame_l, text = '3',command=self.Aller3)
         self.button3.pack(fill='x')
-        self.button2 = tk.Button(self.master, text = '2',command=self.Aller2)
+        self.button2 = tk.Button(self.frame_l, text = '2',command=self.Aller2)
         self.button2.pack(fill='x')
-        self.button1 = tk.Button(self.master, text = '1',command=self.Aller1)
+        self.button1 = tk.Button(self.frame_l, text = '1',command=self.Aller1)
         self.button1.pack(fill='x')
         
+        self.frame_l.pack_propagate(0)
+        self.frame_l.grid(row=0, column=0)
+       
         
         self.CurTempo=0
         self.master.title('ascenseur')
@@ -220,15 +229,15 @@ class Lift:
             self.Etages.ind4d.deselect()
         if etage==5:
             self.Etages.ind5d.deselect()
-
+            
     def CreerEtage(self):
-        self.newWindow = tk.Toplevel(self.master)
-        self.Etages = Etages(self.newWindow,self)
+        #self.newWindow = tk.Toplevel(self.master)
+        self.Etages = Etages(self.master,self)
 
     def CreerElevator(self):
 
-        self.newWindow = tk.Toplevel(self.master)
-        self.Elevator = Elevator(self.newWindow)
+        #self.newWindow = tk.Toplevel(self.master)
+        self.Elevator = Elevator(self.master)
 
     def move(self):
 # comment out for exam
@@ -410,62 +419,65 @@ class Lift:
 class Etages(Lift):
     def __init__(self, master,Lift):
         self.master = master
+        self.frame_e = tk.Frame(self.master,width=100, height=280)
+        #pour debuguer
+        #self.frame_e.config(highlightbackground="black", highlightthickness=1)
 
-        self.master.title('Etages')
+        #self.master.title('Etages')
         
         '''
         self.button5u=tk.Button(self.frame,text='5 ^',command=Lift.Aller5)
         self.button5u.pack()
         '''
-        self.button5d=tk.Button(self.master,text='5 v',command=Lift.Aller5d)
-        self.button5d.place(height=30, width=30, x=30,y=0)
-        self.ind5d= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind5d.place(x=70,y=9)
+        self.button5d=tk.Button(self.frame_e,text='5 v',command=Lift.Aller5d)
+        self.button5d.place(height=30, width=30, x=0,y=0)
+        self.ind5d= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind5d.place(x=40,y=9)
        
        
-        self.button4u=tk.Button(self.master,text='4 ^',command=Lift.Aller4u)
-        self.button4u.place(height=30, width=30, x=30,y=40)
-        self.ind4u= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind4u.place(x=70,y=49)
+        self.button4u=tk.Button(self.frame_e,text='4 ^',command=Lift.Aller4u)
+        self.button4u.place(height=30, width=30, x=0,y=40)
+        self.ind4u= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind4u.place(x=40,y=49)
         
-        self.button4d=tk.Button(self.master,text='4 v',command=Lift.Aller4d)
-        self.button4d.place(height=30, width=30, x=30,y=70)
-        self.ind4d= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind4d.place(x=70,y=79)
+        self.button4d=tk.Button(self.frame_e,text='4 v',command=Lift.Aller4d)
+        self.button4d.place(height=30, width=30, x=0,y=70)
+        self.ind4d= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind4d.place(x=40,y=79)
 
 
-        self.button3u=tk.Button(self.master,text='3 ^',command=Lift.Aller3u)
-        self.button3u.place(height=30, width=30, x=30,y=110)
-        self.ind3u= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind3u.place(x=70,y=119)
+        self.button3u=tk.Button(self.frame_e,text='3 ^',command=Lift.Aller3u)
+        self.button3u.place(height=30, width=30, x=0,y=110)
+        self.ind3u= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind3u.place(x=40,y=119)
     
-        self.button3d=tk.Button(self.master,text='3 v',command=Lift.Aller3d)
-        self.button3d.place(height=30, width=30, x=30,y=140)
-        self.ind3d= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind3d.place(x=70,y=149)
+        self.button3d=tk.Button(self.frame_e,text='3 v',command=Lift.Aller3d)
+        self.button3d.place(height=30, width=30, x=0,y=140)
+        self.ind3d= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind3d.place(x=40,y=149)
         
 
-        self.button2u=tk.Button(self.master,text='2 ^',command=Lift.Aller2u)
-        self.button2u.place(height=30, width=30, x=30,y=180)
-        self.ind2u= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind2u.place(x=70,y=189)
+        self.button2u=tk.Button(self.frame_e,text='2 ^',command=Lift.Aller2u)
+        self.button2u.place(height=30, width=30, x=0,y=180)
+        self.ind2u= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind2u.place(x=40,y=189)
         
-        self.button2d=tk.Button(self.master,text='2 v',command=Lift.Aller2d)
-        self.button2d.place(height=30, width=30, x=30,y=210)
-        self.ind2d= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind2d.place(x=70,y=219)
+        self.button2d=tk.Button(self.frame_e,text='2 v',command=Lift.Aller2d)
+        self.button2d.place(height=30, width=30, x=0,y=210)
+        self.ind2d= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind2d.place(x=40,y=219)
         
         
-        self.button1u=tk.Button(self.master,text='1 ^',command=Lift.Aller1u)
-        self.button1u.place(height=30, width=30, x=30,y=250)
-        self.ind1u= tk.Checkbutton(self.master,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
-        self.ind1u.place(x=70,y=259)
+        self.button1u=tk.Button(self.frame_e,text='1 ^',command=Lift.Aller1u)
+        self.button1u.place(height=30, width=30, x=0,y=250)
+        self.ind1u= tk.Checkbutton(self.frame_e,font=("Arial",1),state='disabled', selectcolor="green",indicatoron=0,pady=3,padx=3)
+        self.ind1u.place(x=40,y=259)
         '''
         self.button1d=tk.Button(self.frame,text='1 v',command=Lift.Aller1)
         self.button1d.pack()
         '''
         
-        self.master.geometry("100x280")
+        self.frame_e.grid(row=0,column=2)
         #self.master.geometry("+200+200")
 
     def close_windows(self):
@@ -474,9 +486,11 @@ class Etages(Lift):
 class Elevator:
     def __init__(self, master):
         self.master = master
-        self.frame = tk.Frame(self.master)
+        self.frame = tk.Frame(self.master,width=150, height=165)
+        #pour debuguer
+        #self.frame.config(highlightbackground="black", highlightthickness=1)
 
-        self.master.title('Position')
+        #self.master.title('Position')
 
         style=ttk.Style()
         style.configure("TButton",padding=(0,5,0,5)) 
@@ -506,10 +520,9 @@ class Elevator:
         self.button1 = ttk.Button(self.frame, text = '#_1_#')
         self.button1.configure(style="Black.TButton")
         self.button1.pack()
-
-        self.master.geometry("170x170")
-
-        self.frame.pack()
+        
+        self.frame.pack_propagate(0)
+        self.frame.grid(row=0,column=1)
 
     def Rouge5(self):
 

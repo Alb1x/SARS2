@@ -123,12 +123,14 @@ class Lift:
         
     def Aller5(self,_dir='n'):
         if self.CurEtage==5:
+            self.turnoff_l(5)
             return
         if 5 not in self.target:
             self.target.append(5)
 
     def Aller4(self,_dir='n'):
         if self.CurEtage==4:
+            self.turnoff_l(4)
             return
         if len(self.target)==0:
                 self.target.append(4)
@@ -162,6 +164,7 @@ class Lift:
     
     def Aller3(self,_dir='n'):
         if self.CurEtage==3:
+            self.turnoff_l(3)
             return
         if len(self.target)==0:
                 self.target.append(3)
@@ -195,6 +198,7 @@ class Lift:
 
     def Aller2(self,_dir='n'):
         if self.CurEtage==2:
+            self.turnoff_l(2)
             return
         if len(self.target)==0:
                 self.target.append(2)
@@ -228,6 +232,7 @@ class Lift:
 
     def Aller1(self,_dir='n'):
         if self.CurEtage==1:
+            self.turnoff_l(1)
             return
         if 1 not in self.target:
             self.target.append(1)

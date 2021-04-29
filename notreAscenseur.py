@@ -39,8 +39,8 @@ class MyTimer:
 class Lift:
     def __init__(self, master):
         self.master = master
-        self.master.title('Ascenseur')
-        self.master.geometry("350x280+500+200")
+        self.master.title("Ascenseur")
+        self.master.geometry("360x280+500+200")
         
         for i in range(3):
             self.master.columnconfigure(i, weight=1)
@@ -56,8 +56,6 @@ class Lift:
         self.CreerEtage()
         
         self.master.iconbitmap("elevator.ico")
-        #self.Etages.master.iconbitmap("elevator.ico")
-        #self.Elevator.master.iconbitmap("elevator.ico")
         
         self.buttonA = tk.Button(self.frame_l, text = 'Alarm')
         self.buttonA.pack()
@@ -76,16 +74,18 @@ class Lift:
         self.button_ouvrir.pack(fill='x')
         
         self.frame_l.pack_propagate(0)
-        self.frame_l.grid(row=0, column=0)
+        self.frame_l.grid(row=0, column=0, padx=(10,0))
        
         
         self.CurTempo=0
         self.CurTempoPortes=0
-        self.master.title('ascenseur')
         self.CurEtage=1
         self.curMouvement='0'
         self.target=[]
         
+        self.debug_=0
+        #comment out for debugging
+        #self.debug()
         
        
     def Aller5d(self):
@@ -126,7 +126,10 @@ class Lift:
             self.turnoff_l(5)
             return
         if 5 not in self.target:
-            self.target.append(5)
+            if self.CurEtage==4:
+                self.target.insert(0,5)
+            else:
+                self.target.append(5)
 
     def Aller4(self,_dir='n'):
         if self.CurEtage==4:
@@ -137,7 +140,10 @@ class Lift:
                 return
                 
         if 4<max(self.CurEtage, self.target[0]) and 4>min(self.CurEtage, self.target[0]): # Si sur le chemin
-            if _dir==self.curMouvement or _dir=='n': #dans la même direction
+            temp='-'
+            if self.target[0]-self.CurEtage>0:
+                temp='+'
+            if _dir==temp or _dir=='n': #dans la même direction
                 if 4 in self.target:
                     if self.target.index(4)>0:
                         self.target.remove(4)
@@ -171,7 +177,10 @@ class Lift:
                 return
                 
         if 3<max(self.CurEtage, self.target[0]) and 3>min(self.CurEtage, self.target[0]): # Si sur le chemin
-            if _dir==self.curMouvement or _dir=='n': #dans la même direction
+            temp='-'
+            if self.target[0]-self.CurEtage>0:
+                temp='+'
+            if _dir==temp or _dir=='n': #dans la même direction
                 if 3 in self.target:
                     if self.target.index(3)>0:
                         self.target.remove(3)
@@ -205,8 +214,11 @@ class Lift:
                 return
                 
         if 2<max(self.CurEtage, self.target[0]) and 2>min(self.CurEtage, self.target[0]): # Si sur le chemin
-            if _dir==self.curMouvement or _dir=='n': #dans la même direction
-                if 2in self.target:
+            temp='-'
+            if self.target[0]-self.CurEtage>0:
+                temp='+'
+            if _dir==temp or _dir=='n': #dans la même direction
+                if 2 in self.target:
                     if self.target.index(2)>0:
                         self.target.remove(2)
                     else:
@@ -235,7 +247,10 @@ class Lift:
             self.turnoff_l(1)
             return
         if 1 not in self.target:
-            self.target.append(1)
+            if self.CurEtage==2:
+                self.target.insert(0,1)
+            else:
+                self.target.append(1)
 
     def turnoff_l(self,etage):
         if etage==1:
@@ -270,12 +285,13 @@ class Lift:
         self.Elevator = Elevator(self.master)
 
     def move(self):
-        # comment out for exam
-        #print ("Mouvement : "+str(self.curMouvement))
-        #print ("Etage actuel : "+str(self.CurEtage))
-        #print ("Tempo : "+str(self.CurTempo))
-        #print("Tempo portes : "+str(self.CurTempoPortes))
-        #print ("Liste targets : "+str(self.target))
+        if self.debug_:
+            self.mouv_var.set("Mouvement : "+str(self.curMouvement))
+            self.eta_var.set("Etage actuel : "+str(self.CurEtage))
+            self.tempo_var.set("Tempo : "+str(self.CurTempo))
+            self.tempop_var.set("Tempo portes : "+str(self.CurTempoPortes))
+            self.target_var.set("Liste target : "+str(self.target))
+            
         '''
         if self.CurEtage > 5:
             self.CurEtage=5
@@ -459,6 +475,39 @@ class Lift:
                 self.Elevator.Bleu4()
                 self.Elevator.Orange5()
                 
+    def debug(self):
+        self.debug_=1
+        self.debugWindow = tk.Toplevel(self.master)
+        self.debugWindow.geometry("200x140")
+        self.debugWindow.title("Infos")
+        self.debugWindow.iconbitmap("bug.ico")
+        self.frame_debug= tk.Frame(self.debugWindow)
+
+        
+        self.mouv_var=tk.StringVar()
+        mouv=tk.Label(self.frame_debug,textvariable=self.mouv_var)
+        mouv.pack(side="top", expand=True, fill="both")
+        
+        self.eta_var=tk.StringVar()
+        eta=tk.Label(self.frame_debug,textvariable=self.eta_var)
+        eta.pack(side="top", expand=True, fill="both")
+        
+        self.tempo_var=tk.StringVar()
+        tempo=tk.Label(self.frame_debug,textvariable=self.tempo_var)
+        tempo.pack(side="top", expand=True, fill="both")
+        
+        self.tempop_var=tk.StringVar()
+        tempop=tk.Label(self.frame_debug,textvariable=self.tempop_var)
+        tempop.pack(side="top", expand=True, fill="both")
+        
+        self.target_var=tk.StringVar()
+        ltar=tk.Label(self.frame_debug,textvariable=self.target_var)
+        ltar.pack(side="top", expand=True, fill="both")
+        
+        self.frame_debug.pack_propagate(0)
+        self.frame_debug.pack(fill="both", expand=True)
+    
+        
     def exit(self):
         self.master.destroy()  
         global globstop

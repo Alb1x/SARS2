@@ -124,6 +124,7 @@ class Lift:
     def Aller5(self,_dir='n'):
         if self.CurEtage==5:
             self.turnoff_l(5)
+            self.Ouvrir()
             return
         if 5 not in self.target:
             if self.CurEtage==4:
@@ -134,6 +135,7 @@ class Lift:
     def Aller4(self,_dir='n'):
         if self.CurEtage==4 and self.curMouvement=='0':
             self.turnoff_l(4)
+            self.Ouvrir()
             return
         if len(self.target)==0:
                 self.target.append(4)
@@ -171,6 +173,7 @@ class Lift:
     def Aller3(self,_dir='n'):
         if self.CurEtage==3 and self.curMouvement=='0':
             self.turnoff_l(3)
+            self.Ouvrir()
             return
         if len(self.target)==0:
                 self.target.append(3)
@@ -208,6 +211,7 @@ class Lift:
     def Aller2(self,_dir='n'):
         if self.CurEtage==2 and self.curMouvement=='0':
             self.turnoff_l(2)
+            self.Ouvrir()
             return
         if len(self.target)==0:
                 self.target.append(2)
@@ -245,6 +249,7 @@ class Lift:
     def Aller1(self,_dir='n'):
         if self.CurEtage==1:
             self.turnoff_l(1)
+            self.Ouvrir()
             return
         if 1 not in self.target:
             if self.CurEtage==2:
@@ -292,14 +297,14 @@ class Lift:
             self.tempop_var.set("Tempo portes : "+str(self.CurTempoPortes))
             self.target_var.set("Liste target : "+str(self.target))
             
-        '''
+        
         if self.CurEtage > 5:
             self.CurEtage=5
             self.curMouvement='0'
         if self.CurEtage < 1:
             self.CurEtage=1
             self.curMouvement='0'
-        '''
+        
         if self.curMouvement == '+' or self.curMouvement=='-' :
             self.CurTempo+=1
             

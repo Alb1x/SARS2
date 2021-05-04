@@ -85,7 +85,7 @@ class Lift:
         
         self.debug_=0
         #comment out for debugging
-        self.debug()
+        #self.debug()
         
        
     def Aller5d(self):

@@ -85,7 +85,7 @@ class Lift:
         
         self.debug_=0
         #comment out for debugging
-        #self.debug()
+        self.debug()
         
        
     def Aller5d(self):
@@ -132,7 +132,7 @@ class Lift:
                 self.target.append(5)
 
     def Aller4(self,_dir='n'):
-        if self.CurEtage==4:
+        if self.CurEtage==4 and self.curMouvement=='0':
             self.turnoff_l(4)
             return
         if len(self.target)==0:
@@ -169,7 +169,7 @@ class Lift:
             self.target.append(4)
     
     def Aller3(self,_dir='n'):
-        if self.CurEtage==3:
+        if self.CurEtage==3 and self.curMouvement=='0':
             self.turnoff_l(3)
             return
         if len(self.target)==0:
@@ -206,7 +206,7 @@ class Lift:
             self.target.append(3)
 
     def Aller2(self,_dir='n'):
-        if self.CurEtage==2:
+        if self.CurEtage==2 and self.curMouvement=='0':
             self.turnoff_l(2)
             return
         if len(self.target)==0:

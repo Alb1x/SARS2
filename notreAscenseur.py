@@ -757,10 +757,27 @@ class Elevator:
         self.button1.pack()
 
 
+L=[Lift,Lift_bug1,Lift_bug2]
+if(sys.argv.length ==1):
+    appf=L[0]
+else :
+    arg=sys.argv[1]
+    if(not arg.isdigit()):
+        print("L'argument doit être un nombre.")
+        sys.exit()
+    else:
+        n=int(arg)
+        if(n<0 or n>=len(L)):
+            print("Le nombre doit être compris entre 0 et "+str(len(L)-1)+".")
+            sys.exit()
+        else:
+            appf=L[n]
+
+
 
 def main(): 
     root = tk.Tk()
-    app = Lift(root)
+    app = appf(root)
     root.protocol("WM_DELETE_WINDOW", app.sortir)
     Cron=MyTimer(0.02,app.move)
     #comment out for debuging

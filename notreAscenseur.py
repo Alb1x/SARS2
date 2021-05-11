@@ -10,6 +10,7 @@ from random import randint
 import threading
 
 globstop = 0
+t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
 
 class MyTimer:
     global globstop
@@ -54,6 +55,7 @@ class Lift:
         
         self.CreerElevator()
         self.CreerEtage()
+        self.CreerOptions()
         
         self.master.iconbitmap("elevator.ico")
         
@@ -85,7 +87,7 @@ class Lift:
         
         self.debug_=0
         #comment out for debugging
-        #self.debug()
+        self.debug()
         
        
     def Aller5d(self):
@@ -288,14 +290,20 @@ class Lift:
 
         #self.newWindow = tk.Toplevel(self.master)
         self.Elevator = Elevator(self.master)
+        
+    def CreerOptions(self):
+         self.newWindow = tk.Toplevel(self.master)
+         self.Options = Options(self.newWindow)
 
     def move(self):
+        global t_att_po
         if self.debug_:
             self.mouv_var.set("Mouvement : "+str(self.curMouvement))
             self.eta_var.set("Etage actuel : "+str(self.CurEtage))
             self.tempo_var.set("Tempo : "+str(self.CurTempo))
             self.tempop_var.set("Tempo portes : "+str(self.CurTempoPortes))
             self.target_var.set("Liste target : "+str(self.target))
+            self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(t_att_po))
             
         
         if self.CurEtage > 5:
@@ -310,8 +318,6 @@ class Lift:
             
         if self.curMouvement== 'p':
             self.CurTempoPortes+=1
-            
-        t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
             
         
         if self.CurTempoPortes==int(t_att_po/0.02) or self.CurTempoPortes==0:
@@ -630,8 +636,7 @@ class Lift_bug1:
             return
         self.Etages.ind1u.select()
         self.Aller1(_dir='+')
-        
-        
+    
     def Aller5(self,_dir='n'):
         #Le bouton ne marche pas 1 fois sur 5
         if randint(1,5)==1 and _dir=='n':
@@ -816,6 +821,7 @@ class Lift_bug1:
         self.Elevator = Elevator(self.master)
 
     def move(self):
+        global t_att_po
         if self.debug_:
             self.mouv_var.set("Mouvement : "+str(self.curMouvement))
             self.eta_var.set("Etage actuel : "+str(self.CurEtage))
@@ -836,8 +842,6 @@ class Lift_bug1:
             
         if self.curMouvement== 'p':
             self.CurTempoPortes+=1
-            
-        t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
             
         
         if self.CurTempoPortes==int(t_att_po/0.02) or self.CurTempoPortes==0:
@@ -1287,11 +1291,35 @@ class Elevator:
         self.button1.configure(style="Black.TButton")
         self.button1.pack()
 
-
+class Options:
+    def __init__(self, master):
+        global t_att_po
+        self.master = master
+        self.master.title("Options")
+        self.master.geometry("250x250+200+200")
+        self.frame_options = tk.Frame(self.master,width=200, height=200)
+        self.t_porte_var=tk.StringVar()
+        self.t_porte_label= tk.Label(self.frame_options, textvariable=self.t_porte_var)
+        self.slide_t_porte = tk.Scale(self.frame_options, from_=1, to=10, orient="horizontal")
+        self.slide_t_v = tk.Button(self.frame_options, text="Enregistrer", command=self.slide_valid)
+        self.t_porte_label.pack()
+        self.slide_t_porte.pack()
+        self.slide_t_v.pack()
+        self.frame_options.pack()
+        
+    def slide_valid(self):
+        global t_att_po
+        t_att_po=self.slide_t_porte.get()
+        
+        
+        
+        
+        
+    
 
 def main(): 
     root = tk.Tk()
-    app = Lift_bug1(root)
+    app = Lift(root)
     root.protocol("WM_DELETE_WINDOW", app.sortir)
     Cron=MyTimer(0.02,app.move)
     #comment out for debuging

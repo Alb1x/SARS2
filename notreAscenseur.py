@@ -1288,7 +1288,7 @@ class Elevator:
         self.button1.pack()
 
 
-L=[Lift,Lift_bug1,Lift_bug2]
+L=[Lift,Lift_bug1]
 if(sys.argv.length ==1):
     appf=L[0]
 else :

@@ -1057,6 +1057,7 @@ class Lift_bug2:
         self.master = master
         self.master.title("Ascenseur")
         self.master.geometry("360x280+500+200")
+        self.description = "Ascenseur où le bouton <<>> ajoute du temps au compteur au lieu de RAZ."
         
         for i in range(3):
             self.master.columnconfigure(i, weight=1)

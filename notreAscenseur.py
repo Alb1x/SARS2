@@ -10,7 +10,8 @@ from random import randint
 import threading
 
 globstop = 0
-t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes    
+t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes  
+etages_bug=[2,5] 
 
 
 
@@ -2351,8 +2352,9 @@ class Options:
         global t_att_po
         self.master = master
         self.master.title("Options")
+        self.master.iconbitmap("opt.ico")
         self.master.geometry("250x250+200+200")
-        self.frame_options = tk.Frame(self.master,width=200, height=200)
+        self.frame_options = tk.Frame(self.master,width=250, height=250)
         self.t_porte_var=tk.StringVar()
         self.t_porte_label= tk.Label(self.frame_options, textvariable=self.t_porte_var)
         self.slide_t_porte = tk.Scale(self.frame_options, from_=1, to=10, orient="horizontal")
@@ -2365,7 +2367,9 @@ class Options:
     def slide_valid(self):
         global t_att_po
         t_att_po=self.slide_t_porte.get()
-
+    if(len(sys.argv) >1):
+        if sys.argv[1]=3:
+            #rajouter les deux étages a échanger
 
 def main(): 
     root = tk.Tk()

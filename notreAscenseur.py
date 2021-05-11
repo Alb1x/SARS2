@@ -11,6 +11,9 @@ import threading
 
 globstop = 0
 
+
+
+
 class MyTimer:
     global globstop
     
@@ -1820,27 +1823,30 @@ class Elevator:
         self.button1.pack()
 
 
-L=[Lift,Lift_bug1,Lift_bug2]
-if(len(sys.argv) ==1):
-    appf=L[0]
-else :
-    arg=sys.argv[1]
-    if(not arg.isdigit()):
-        print("L'argument doit être un nombre.")
-        sys.exit()
-    else:
-        n=int(arg)
-        if(n<0 or n>=len(L)):
-            print("Le nombre doit être compris entre 0 et "+str(len(L)-1)+".")
-            sys.exit()
-        else:
-            appf=L[n]
+
 
 
 
 def main(): 
     root = tk.Tk()
-    app = appf(root)
+    L=[Lift,Lift_bug1,Lift_bug2]
+    if(len(sys.argv) ==1):
+        app=L[0](root)
+    else :
+        arg=sys.argv[1]
+        if(not arg.isdigit()):
+            print("L'argument doit être un nombre.")
+            sys.exit()
+        else:
+            n=int(arg)
+            if(n<0 or n>=len(L)):
+                print("Le nombre doit être compris entre 0 et "+str(len(L)-1)+".")
+                sys.exit()
+            else:
+                app=L[n](root)
+    if(len(sys.argv)>2 and sys.argv[2] =="debug"):
+        app.debug()
+
     print("Démarrage de l'Ascenseur avec le fonctionnement : ",app.description)
     root.protocol("WM_DELETE_WINDOW", app.sortir)
     Cron=MyTimer(0.02,app.move)

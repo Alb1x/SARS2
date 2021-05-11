@@ -22,7 +22,8 @@ class MyTimer:
     
     def _run(self):
         if globstop :
-            self.exit()
+            sys.exit()
+            self.stop()
         self._timer = threading.Timer(self._tempo, self._run)
         self._timer.start()
         self._target(*self._args, **self._kwargs)
@@ -41,6 +42,7 @@ class Lift:
         self.master = master
         self.master.title("Ascenseur")
         self.master.geometry("360x280+500+200")
+        self.description="Ascenseur fonctionnel"
         
         for i in range(3):
             self.master.columnconfigure(i, weight=1)
@@ -528,6 +530,7 @@ class Lift_bug1:
         self.master = master
         self.master.title("Ascenseur")
         self.master.geometry("360x280+500+200")
+        self.description="Ascenseur où les boutons ont une chance sur 5 de ne pas marcher."
         
         for i in range(3):
             self.master.columnconfigure(i, weight=1)
@@ -1817,7 +1820,7 @@ class Elevator:
 
 
 L=[Lift,Lift_bug1]
-if(sys.argv.length ==1):
+if(len(sys.argv) ==1):
     appf=L[0]
 else :
     arg=sys.argv[1]
@@ -1837,6 +1840,7 @@ else :
 def main(): 
     root = tk.Tk()
     app = appf(root)
+    print("Démarrage de l'Ascenseur avec le fonctionnement : ",app.description)
     root.protocol("WM_DELETE_WINDOW", app.sortir)
     Cron=MyTimer(0.02,app.move)
     #comment out for debuging

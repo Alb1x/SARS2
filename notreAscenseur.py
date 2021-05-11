@@ -1308,11 +1308,7 @@ else :
 
 def main(): 
     root = tk.Tk()
-<<<<<<< HEAD
     app = appf(root)
-=======
-    app = Lift_bug1(root)
->>>>>>> 945fe310c879bb1aa1416e3a52dd852944cd8f79
     root.protocol("WM_DELETE_WINDOW", app.sortir)
     Cron=MyTimer(0.02,app.move)
     #comment out for debuging

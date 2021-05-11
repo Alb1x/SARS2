@@ -1819,7 +1819,7 @@ class Elevator:
         self.button1.pack()
 
 
-L=[Lift,Lift_bug1]
+L=[Lift,Lift_bug1,Lift_bug2]
 if(len(sys.argv) ==1):
     appf=L[0]
 else :

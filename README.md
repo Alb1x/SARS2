@@ -7,7 +7,9 @@ Ce programme simule les défaillances d'un ascenseur, afin d'y diagnostiquer les
 ## Fonctionnement
 
 Pour lancer le programme, exécutez la commande suivante : 
+
 ```python notreAscenseur.py 1```
+
 afin de lancer la simulation avec le premier bug.
 
 ## Débogage
@@ -15,6 +17,7 @@ afin de lancer la simulation avec le premier bug.
 Pour avoir les informations de débogage, utilisez le mot clé `debug` lors du lancement du script. 
 
 Exemple : 
+
 ```python notreAscenseur.py 1 debug```
 
 ## Description des bugs 
@@ -29,7 +32,10 @@ Exemple :
 ## Auteurs 
 
 Lucas L.
+
 Amaury T.
+
 Alban T.
+
 Fayssal Z.
 

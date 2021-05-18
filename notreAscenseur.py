@@ -61,7 +61,7 @@ class Lift:
         
         self.CreerElevator()
         self.CreerEtage()
-        self.CreerOptions()
+        self.CreerMenuOptions()
         
         self.master.iconbitmap("elevator.ico")
         
@@ -293,6 +293,11 @@ class Lift:
 
         #self.newWindow = tk.Toplevel(self.master)
         self.Elevator = Elevator(self.master)
+     
+    def CreerMenuOptions(self):
+        self.menuG = tk.Menu(self.master)
+        self.master.config(menu=self.menuG)
+        self.menuG.add_command(label="Options", command=self.CreerOptions)
         
     def CreerOptions(self):
          self.newWindow = tk.Toplevel(self.master)
@@ -2367,9 +2372,10 @@ class Options:
     def slide_valid(self):
         global t_att_po
         t_att_po=self.slide_t_porte.get()
+    
     if(len(sys.argv) >1):
-        if sys.argv[1]=3:
-            #rajouter les deux étages a échanger
+        if sys.argv[1]==3:
+            pass#rajouter les deux étages a échanger
 
 def main(): 
     root = tk.Tk()

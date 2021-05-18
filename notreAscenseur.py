@@ -2373,9 +2373,24 @@ class Options:
         global t_att_po
         t_att_po=self.slide_t_porte.get()
     
+    def optionsBug3(self):
+        options = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+        ]
+        
+        clicked = StringVar()
+        clicked.set("1")
+        drop = OptionMenu( self.master , clicked , options )
+        drop.pack()
+
+        
     if(len(sys.argv) >1):
         if sys.argv[1]==3:
-            pass#rajouter les deux étages a échanger
+           optionsBug3()
 
 def main(): 
     root = tk.Tk()

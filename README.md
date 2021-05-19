@@ -27,6 +27,8 @@ Exemple :
 |0 | Fonctionnement normal | 
 |1 | Ascenseur où les boutons ont une chance sur 5 de ne pas marcher.|
 |2|Ascenseur où le bouton <<>> ajoute du temps au compteur au lieu de RAZ.|
+|3|Ascenseur qui échange 2 boutons à l'extérieur de l'ascenseur|
+|4|Ascenseur dont le bouton choisi ne marche plus au bout d'un temps donné.|
 
 
 ## Auteurs 

@@ -292,15 +292,24 @@ class Options:
         self.master.title("Options")
         self.master.iconbitmap("opt.ico")
         self.master.geometry("250x250+200+200")
+        
         self.frame_options = tk.Frame(self.master,width=250, height=250)
+        
+        self.frame_portes = tk.Frame(self.frame_options,width=250, height=50)
+        text_portes = tk.Label(self.frame_portes,text="Changer le timer des portes")
+        text_portes.pack()
         self.t_porte_var=tk.StringVar()
-        self.t_porte_label= tk.Label(self.frame_options, textvariable=self.t_porte_var)
-        self.slide_t_porte = tk.Scale(self.frame_options, from_=1, to=10, orient="horizontal")
-        self.slide_t_v = tk.Button(self.frame_options, text="Enregistrer", command=self.slide_valid)
+        self.t_porte_label= tk.Label(self.frame_portes, textvariable=self.t_porte_var)
+        self.slide_t_porte = tk.Scale(self.frame_portes, from_=1, to=10, orient="horizontal")
+        self.slide_t_v = tk.Button(self.frame_portes, text="Enregistrer", command=self.slide_valid)
         self.t_porte_label.pack()
         self.slide_t_porte.pack()
         self.slide_t_v.pack()
+        self.frame_portes.pack()
         self.frame_options.pack()
+        if(len(sys.argv) >1):
+            if sys.argv[1]=='3':
+                self.optionsBug3()
         
     def slide_valid(self):
         global t_att_po

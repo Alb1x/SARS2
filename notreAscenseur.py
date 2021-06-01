@@ -15,6 +15,7 @@ import settings
 start=time.time()
 
 
+
 class MyTimer:
     
     def __init__(self, tempo, target, args= [], kwargs={}):
@@ -307,6 +308,7 @@ class Options:
         if(len(sys.argv) >1):
             if sys.argv[1]=='3':
                 self.optionsBug3_1()
+                self.optionsBug3_2()
                 
     def on_closing(self):
         settings.option_active = False
@@ -323,12 +325,26 @@ class Options:
             "5",
         ]
         
-        clicked = tk.StringVar()
-        clicked.set("1")
-        drop = tk.OptionMenu( self.master , clicked , *options )
+        clicked1 = tk.StringVar()
+        clicked1.set("1")
+        drop = tk.OptionMenu( self.master , clicked1 , *options )
+        settings.etages_bug[0]=clicked1
         drop.pack()
     
-
+    def optionsBug3_2(self):
+        options = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+        ]
+        
+        clicked2 = tk.StringVar()
+        clicked2.set("5")
+        drop = tk.OptionMenu( self.master , clicked2 , *options )
+        drop.pack()
+        
         
     if(len(sys.argv) >1):
         if sys.argv[1]==3:

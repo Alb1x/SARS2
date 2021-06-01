@@ -16,7 +16,7 @@ etages_bug=[2,5]
 time_before_breakdown = 10
 breakdown_button = "5d"
 start=time.time()
-
+reduction_time = 30
 
 
 

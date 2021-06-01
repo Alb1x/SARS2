@@ -464,7 +464,7 @@ class main:
     def debug(self):
         self.debug_=1
         self.debugWindow = tk.Toplevel(self.master)
-        self.debugWindow.geometry("200x140")
+        self.debugWindow.geometry("200x140+220+100")
         self.debugWindow.title("Infos")
         self.debugWindow.iconbitmap("bug.ico")
         self.frame_debug= tk.Frame(self.debugWindow)

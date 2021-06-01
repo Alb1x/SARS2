@@ -285,7 +285,7 @@ class Options:
         self.master = master
         self.master.title("Options")
         self.master.iconbitmap("opt.ico")
-        self.master.geometry("250x250+200+200")
+        self.master.geometry("250x250+200+300")
         self.master.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         
@@ -304,10 +304,16 @@ class Options:
         self.slide_t_v.pack()
         self.frame_portes.pack()
         self.frame_options.pack()
+        
+        #Si on simule le bug 3:
         if(len(sys.argv) >1):
             if sys.argv[1]=='3':
-                self.optionsBug3_1()
-                self.optionsBug3_2()
+                frame = tk.Frame(self.frame_options)
+                label = tk.Label(frame, text="Boutons à échanger :")
+                label.pack(side="top")
+                self.optionsBug3_1(frame)
+                self.optionsBug3_2(frame)
+                frame.pack(pady=10)
                 
     def on_closing(self):
         settings.option_active = False
@@ -315,7 +321,7 @@ class Options:
     def slide_valid(self):
         settings.t_att_po=self.slide_t_porte.get()
     
-    def optionsBug3_1(self):
+    def optionsBug3_1(self,frame):
         options = [
             "1",
             "2",
@@ -326,10 +332,10 @@ class Options:
         clicked1 = tk.StringVar()
         clicked1.set("2")
         settings.etages_bug.append(clicked1)
-        drop = tk.OptionMenu( self.master , settings.etages_bug[0] , *options )
-        drop.pack()
+        drop = tk.OptionMenu( frame , settings.etages_bug[0] , *options )
+        drop.pack(side="left")
     
-    def optionsBug3_2(self):
+    def optionsBug3_2(self,frame):
         options = [
             "1",
             "2",
@@ -340,8 +346,8 @@ class Options:
         clicked2 = tk.StringVar()
         clicked2.set("5")
         settings.etages_bug.append(clicked2)
-        drop = tk.OptionMenu( self.master , settings.etages_bug[1] , *options )
-        drop.pack()
+        drop = tk.OptionMenu( frame , settings.etages_bug[1] , *options )
+        drop.pack(side="right")
         
         
     if(len(sys.argv) >1):

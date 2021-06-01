@@ -15,7 +15,6 @@ import settings
 start=time.time()
 
 
-
 class MyTimer:
     
     def __init__(self, tempo, target, args= [], kwargs={}):
@@ -326,7 +325,7 @@ class Options:
         ]
         
         clicked1 = tk.StringVar()
-        clicked1.set("1")
+        clicked1.set("2")
         drop = tk.OptionMenu( self.master , clicked1 , *options )
         settings.etages_bug[0]=clicked1
         drop.pack()

@@ -397,8 +397,12 @@ class Options:
         validate_button.pack()
     
     def optionsBug5(self,frame):
+        
+        label1 = tk.Label(frame, textvariable=settings.n_text)
+        label1.pack()
+        label2 = tk.Label(frame, text="Bouton impacté :")
+        label2.pack()
         options = [
-            "door",
             "1u",
             "2u",
             "2d",
@@ -408,11 +412,9 @@ class Options:
             "4d",
             "5d"
         ]
-        clicked = tk.StringVar()
-        clicked.set("door")
-        settings.breakdown_iteration_button=clicked
-        settings.iterations=5
-        settings.nbr_appuye=0
+        drop = tk.OptionMenu( frame , settings.breakdown_iteration_button , *options )
+        drop.pack()
+        
         
     if(len(sys.argv) >1):
         if sys.argv[1]==3:

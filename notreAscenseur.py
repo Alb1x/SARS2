@@ -12,7 +12,7 @@ import glob
 import threading
 
 import settings
-start=time.time()
+
 
 
 class MyTimer:
@@ -315,11 +315,43 @@ class Options:
                 self.optionsBug3_2(frame)
                 frame.pack(pady=10)
                 
+        #Si on simule le bug 4:
+        if(len(sys.argv) >1):
+            if sys.argv[1]=='4':
+                frame = tk.Frame(self.frame_options)
+                self.optionsBug4(frame)
+                frame.pack(pady=10)
+                
+        
     def on_closing(self):
+        self.master.destroy()
         settings.option_active = False
         
     def slide_valid(self):
         settings.t_att_po=self.slide_t_porte.get()
+        
+    def bug4_valid(self):
+        content = self.text_entry.get()
+        # if len(content)==1 and content.isdigit():
+        #     if int(content)>0 and int(content)<6:
+        #         settings.breakdown_button=content
+        #         self.texy_entry.select_clear()
+        if len(content)==2:
+            if content[0].isdigit() and int(content[0])>0 and int(content[0])<6 and (content[1]=='d'or content[1]=='u'):
+                if content=="1d" or content=="5u":
+                    self.text_entry.delete(0, "end")
+                    self.text_entry.insert(0,"INVALIDE")
+                else:
+                    settings.breakdown_button=content
+                    self.text_entry.delete(0, "end")
+            else:
+                self.text_entry.delete(0, "end")
+                self.text_entry.insert(0,"INVALIDE")
+        else :
+            self.text_entry.delete(0, "end")
+            self.text_entry.insert(0,"INVALIDE")
+            
+            
     
     def optionsBug3_1(self,frame):
         options = [
@@ -348,6 +380,19 @@ class Options:
         settings.etages_bug.append(clicked2)
         drop = tk.OptionMenu( frame , settings.etages_bug[1] , *options )
         drop.pack(side="right")
+        
+    def optionsBug4(self,frame):
+        settings.time_passed = tk.StringVar()
+        label = tk.Label(frame, textvar=settings.time_passed)
+        label.pack()
+        frame2 = tk.Frame(frame)
+        label2 = tk.Label(frame2, text="Bouton impacté :")
+        label2.pack(side="left")
+        self.text_entry = tk.Entry(frame2)
+        self.text_entry.pack(side="right")
+        frame2.pack()
+        validate_button = tk.Button(frame, text="Enregistrer", command=self.bug4_valid)
+        validate_button.pack()
         
         
     if(len(sys.argv) >1):

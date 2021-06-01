@@ -1,7 +1,9 @@
 import tkinter as tk
-
+import time
 globstop = 0
 t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes
+
+start=time.time()
 
 etages_bug=[]
 time_before_breakdown = 10

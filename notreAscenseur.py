@@ -323,11 +323,10 @@ class Options:
             "4",
             "5",
         ]
-        
         clicked1 = tk.StringVar()
         clicked1.set("2")
-        drop = tk.OptionMenu( self.master , clicked1 , *options )
-        settings.etages_bug[0]=clicked1
+        settings.etages_bug.append(clicked1)
+        drop = tk.OptionMenu( self.master , settings.etages_bug[0] , *options )
         drop.pack()
     
     def optionsBug3_2(self):
@@ -338,10 +337,10 @@ class Options:
             "4",
             "5",
         ]
-        
         clicked2 = tk.StringVar()
         clicked2.set("5")
-        drop = tk.OptionMenu( self.master , clicked2 , *options )
+        settings.etages_bug.append(clicked2)
+        drop = tk.OptionMenu( self.master , settings.etages_bug[1] , *options )
         drop.pack()
         
         

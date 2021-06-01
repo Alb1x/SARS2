@@ -336,6 +336,7 @@ class Options:
 
 
 def main(): 
+    print("Wesh")
     root = tk.Tk()
     sys.path.insert(0, './bugs')
     L0=glob.glob("./bugs/*.py")

@@ -2,6 +2,7 @@ import sys
 sys.path.insert(0, '..')
 from notreAscenseur import *
 import tkinter as tk
+
 class main:
     def __init__(self, master):
         self.master = master
@@ -22,6 +23,7 @@ class main:
         self.CreerElevator()
         self.CreerEtage()
         self.CreerMenuOptions()
+
 
         self.master.iconbitmap("elevator.ico")
 

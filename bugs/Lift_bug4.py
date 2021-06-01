@@ -3,11 +3,12 @@ sys.path.insert(0, '..')
 from notreAscenseur import *
 import tkinter as tk
 from Lift import main as Lift
+description="Ascenseur dont le bouton choisi ne marche plus au bout d'un temps donné."
 class main(Lift):
-    Lift.description2="Ascenseur dont le bouton choisi ne marche plus au bout d'un temps donné."
+
 
     def custom_init(self):
-        self.description=main.description2
+        self.description=description
 
     def Aller5d(self):
         global start

@@ -15,10 +15,8 @@ class main(Lift):
 
         if etages_bug[0]==5 or etages_bug[1]==5 :
             if etages_bug[0]==5 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='-')
         else :
@@ -29,10 +27,8 @@ class main(Lift):
         self.Etages.ind4u.select()
         if etages_bug[0]==4 or etages_bug[1]==4 :
             if etages_bug[0]==4 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='+')
         else :
@@ -43,10 +39,8 @@ class main(Lift):
         self.Etages.ind4d.select()
         if etages_bug[0]==4 or etages_bug[1]==4 :
             if etages_bug[0]==4 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='-')
         else :
@@ -57,10 +51,8 @@ class main(Lift):
         self.Etages.ind3u.select()
         if etages_bug[0]==3 or etages_bug[1]==3 :
             if etages_bug[0]==3 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='+')
         else :
@@ -71,10 +63,8 @@ class main(Lift):
         self.Etages.ind3d.select()
         if etages_bug[0]==3 or etages_bug[1]==3 :
             if self.etages_bug[0]==3 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='-')
         else :
@@ -85,10 +75,8 @@ class main(Lift):
         self.Etages.ind2u.select()
         if etages_bug[0]==2 or etages_bug[1]==2 :
             if etages_bug[0]==2 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='+')
         else :
@@ -99,10 +87,8 @@ class main(Lift):
         self.Etages.ind2d.select()
         if etages_bug[0]==2 or etages_bug[1]==2 :
             if self.etages_bug[0]==2 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='-')
         else :
@@ -112,10 +98,8 @@ class main(Lift):
         self.Etages.ind1u.select()
         if etages_bug[0]==1 or etages_bug[1]==1 :
             if etages_bug[0]==1 :
-                #self.__dict__["Aller"+str(self.etages_bug[1])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[1]))
             else :
-                #self.__dict__["Aller"+str(self.etages_bug[0])](_dir='-')
                 Aller=getattr(main, "Aller"+str(etages_bug[0]))
             Aller(self,_dir='+')
         else :

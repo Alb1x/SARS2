@@ -8,19 +8,15 @@ import os
 from random import randint
 import glob
 
+
 import threading
 
-globstop = 0
-t_att_po=5  #temps en seconde pendant lequel les portes restent ouvertes  
-etages_bug=[2,5] 
-time_before_breakdown = 10
-breakdown_button = "5d"
+import settings
 start=time.time()
 
 
 
 class MyTimer:
-    global globstop
     
     def __init__(self, tempo, target, args= [], kwargs={}):
         self._target = target
@@ -29,7 +25,7 @@ class MyTimer:
         self._tempo = tempo
     
     def _run(self):
-        if globstop :
+        if settings.globstop :
             sys.exit()
             self.stop()
         self._timer = threading.Timer(self._tempo, self._run)
@@ -286,11 +282,14 @@ class Elevator:
 
 class Options:
     def __init__(self, master):
-        global t_att_po
+
         self.master = master
         self.master.title("Options")
         self.master.iconbitmap("opt.ico")
         self.master.geometry("250x250+200+200")
+        self.master.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+        
         
         self.frame_options = tk.Frame(self.master,width=250, height=250)
         
@@ -308,13 +307,15 @@ class Options:
         self.frame_options.pack()
         if(len(sys.argv) >1):
             if sys.argv[1]=='3':
-                self.optionsBug3()
+                self.optionsBug3_1()
+                
+    def on_closing(self):
+        settings.option_active = False
         
     def slide_valid(self):
-        global t_att_po
-        t_att_po=self.slide_t_porte.get()
+        settings.t_att_po=self.slide_t_porte.get()
     
-    def optionsBug3(self):
+    def optionsBug3_1(self):
         options = [
             "1",
             "2",
@@ -323,15 +324,16 @@ class Options:
             "5",
         ]
         
-        clicked = StringVar()
+        clicked = tk.StringVar()
         clicked.set("1")
-        drop = OptionMenu( self.master , clicked , options )
+        drop = tk.OptionMenu( self.master , clicked , *options )
         drop.pack()
+    
 
         
     if(len(sys.argv) >1):
         if sys.argv[1]==3:
-           optionsBug3()
+           optionsBug3_1()
 
 
 def main(): 

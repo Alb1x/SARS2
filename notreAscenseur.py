@@ -318,10 +318,18 @@ class Options:
         #Si on simule le bug 4:
         if(len(sys.argv) >1):
             if sys.argv[1]=='4':
+                settings.n_bug='4'
                 frame = tk.Frame(self.frame_options)
                 self.optionsBug4(frame)
                 frame.pack(pady=10)
                 
+        #Si on simule le bug 5:
+        if(len(sys.argv) >1):
+            if sys.argv[1]=='5':
+                settings.n_bug='5'
+                frame = tk.Frame(self.frame_options)
+                self.optionsBug5(frame)
+                frame.pack(pady=10)
         
     def on_closing(self):
         self.master.destroy()
@@ -361,9 +369,6 @@ class Options:
             "4",
             "5",
         ]
-        clicked1 = tk.StringVar()
-        clicked1.set("2")
-        settings.etages_bug.append(clicked1)
         drop = tk.OptionMenu( frame , settings.etages_bug[0] , *options )
         drop.pack(side="left")
     
@@ -375,9 +380,6 @@ class Options:
             "4",
             "5",
         ]
-        clicked2 = tk.StringVar()
-        clicked2.set("5")
-        settings.etages_bug.append(clicked2)
         drop = tk.OptionMenu( frame , settings.etages_bug[1] , *options )
         drop.pack(side="right")
         
@@ -393,7 +395,24 @@ class Options:
         frame2.pack()
         validate_button = tk.Button(frame, text="Enregistrer", command=self.bug4_valid)
         validate_button.pack()
-        
+    
+    def optionsBug5(self,frame):
+        options = [
+            "door",
+            "1u",
+            "2u",
+            "2d",
+            "3u",
+            "3d",
+            "4u",
+            "4d",
+            "5d"
+        ]
+        clicked = tk.StringVar()
+        clicked.set("door")
+        settings.breakdown_iteration_button=clicked
+        settings.iterations=5
+        settings.nbr_appuye=0
         
     if(len(sys.argv) >1):
         if sys.argv[1]==3:

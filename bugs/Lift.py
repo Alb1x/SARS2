@@ -279,7 +279,8 @@ class main:
             self.target_var.set("Liste target : "+str(self.target))
         if settings.option_active:
             self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(settings.t_att_po))
-            settings.time_passed.set("Temps passé / temps de vie = "+str(int(time.time()-settings.start))+"/"+str(int(settings.time_before_breakdown)))
+            if settings.n_bug=="4":
+                settings.time_passed.set("Temps passé / temps de vie = "+str(int(time.time()-settings.start))+"/"+str(int(settings.time_before_breakdown)))
 
         if self.CurEtage > 5:
             self.CurEtage=5

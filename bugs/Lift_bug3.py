@@ -5,6 +5,14 @@ import tkinter as tk
 from Lift import main as Lift
 description="Ascenseur qui échange 2 boutons à l'extérieur de l'ascenseur"
 import settings
+
+clicked1 = tk.StringVar()
+clicked1.set("2")
+settings.etages_bug.append(clicked1)
+clicked2 = tk.StringVar()
+clicked2.set("5")
+settings.etages_bug.append(clicked2)
+
 class main(Lift):
 
     def custom_init(self):
@@ -14,7 +22,6 @@ class main(Lift):
         self.Etages.ind5d.select()
         if settings.etages_bug[0].get()=='5' or settings.etages_bug[1].get()=='5' :
             if settings.etages_bug[0].get()=='5' :
-                print("yes")
                 Aller=getattr(main, "Aller"+settings.etages_bug[1].get())
             else :
                 Aller=getattr(main, "Aller"+settings.etages_bug[0].get())
@@ -80,7 +87,7 @@ class main(Lift):
     def Aller2d(self):
         self.Etages.ind2d.select()
         if settings.etages_bug[0].get()=='2' or settings.etages_bug[1].get()=='2' :
-            if self.settings.etages_bug[0].get()=='2':
+            if settings.etages_bug[0].get()=='2':
                 Aller=getattr(main, "Aller"+settings.etages_bug[1].get())
             else :
                 Aller=getattr(main, "Aller"+settings.etages_bug[0].get())
@@ -90,11 +97,11 @@ class main(Lift):
 
     def Aller1u(self):
         self.Etages.ind1u.select()
-        if settings.settings.etages_bug[0].get()=='1' or settings.settings.etages_bug[1].get()=='1' :
-            if settings.settings.etages_bug[0].get()=='1' :
-                Aller=getattr(main, "Aller"+settings.settings.etages_bug[1].get())
+        if settings.etages_bug[0].get()=='1' or settings.etages_bug[1].get()=='1' :
+            if settings.etages_bug[0].get()=='1' :
+                Aller=getattr(main, "Aller"+settings.etages_bug[1].get())
             else :
-                Aller=getattr(main, "Aller"+settings.settings.etages_bug[0].get())
+                Aller=getattr(main, "Aller"+settings.etages_bug[0].get())
             Aller(self,_dir='+')
         else :
             self.Aller1(_dir='+')

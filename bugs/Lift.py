@@ -1,6 +1,7 @@
 import sys
 sys.path.insert(0, '..')
 from notreAscenseur import *
+import settings
 import tkinter as tk
 class main:
     def __init__(self, master):
@@ -260,19 +261,22 @@ class main:
         self.master.config(menu=self.menuG)
         self.menuG.add_command(label="Options", command=self.CreerOptions)
 
+
+
     def CreerOptions(self):
             self.newWindow = tk.Toplevel(self.master)
             self.Options = Options(self.newWindow)
+            settings.option_active = True
 
     def move(self):
-        global t_att_po
         if self.debug_:
             self.mouv_var.set("Mouvement : "+str(self.curMouvement))
             self.eta_var.set("Etage actuel : "+str(self.CurEtage))
             self.tempo_var.set("Tempo : "+str(self.CurTempo))
             self.tempop_var.set("Tempo portes : "+str(self.CurTempoPortes))
             self.target_var.set("Liste target : "+str(self.target))
-            self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(t_att_po))
+            if settings.option_active:
+                self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(settings.t_att_po))
 
 
         if self.CurEtage > 5:
@@ -289,7 +293,7 @@ class main:
             self.CurTempoPortes+=1
 
 
-        if self.CurTempoPortes==int(t_att_po/0.02) or self.CurTempoPortes==0:
+        if self.CurTempoPortes==int(settings.t_att_po/0.02) or self.CurTempoPortes==0:
             if self.curMouvement=='p':
                 self.curMouvement='0'
             self.CurTempoPortes=0
@@ -484,18 +488,17 @@ class main:
         ltar=tk.Label(self.frame_debug,textvariable=self.target_var)
         ltar.pack(side="top", expand=True, fill="both")
 
+
         self.frame_debug.pack_propagate(0)
         self.frame_debug.pack(fill="both", expand=True)
 
 
     def exit(self):
         self.master.destroy()
-        global globstop
-        globstop= 1
+        settings.globstop= 1
 
     def sortir(self):
-        global globstop
-        globstop = 1
+        settings.globstop = 1
         sys.exit(1)
 
     def custom_init(self):

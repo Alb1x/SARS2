@@ -12,6 +12,7 @@ class main(Lift):
         self.description=description
 
     #Ouvre la porte si l'ascenseur est à l'arrêt
+    
     def Ouvrir(self):
         if self.curMouvement=='0':
             self.target.insert(0,self.CurEtage)

@@ -16,10 +16,14 @@ time_btw_clics_min = 2
 time_last_clic = time.time()
 
 class main(Lift):
+    
     def Aller5(self,_dir='n'):
+        # appel des variables globales
         global time_btw_clics_min
         global time_last_clic
+        # on test si l'appel est pris en compte ou non
         if time.time() - time_last_clic > time_btw_clics_min:
+            # s'il est pris en compte on met à jour le temps du dernier appel
             time_last_clic = time.time()
             if self.CurEtage==5:
                 self.turnoff_l(5)
@@ -30,8 +34,6 @@ class main(Lift):
                     self.target.insert(0,5)
                 else:
                     self.target.append(5)
-        else:
-            time_last_clic = time.time()
         
 
     def Aller4(self,_dir='n'):
@@ -74,8 +76,6 @@ class main(Lift):
                         return
             if 4 not in self.target:
                 self.target.append(4)
-        else:
-            time_last_clic = time.time()
         
     def Aller3(self,_dir='n'):
         global time_btw_clics_min
@@ -118,8 +118,6 @@ class main(Lift):
                         return
             if 3 not in self.target:
                 self.target.append(3)
-        else:
-            time_last_clic = time.time()
         
     def Aller2(self,_dir='n'):
         global time_btw_clics_min
@@ -162,8 +160,6 @@ class main(Lift):
                         return
             if 2 not in self.target:
                 self.target.append(2)
-        else:
-            time_last_clic = time.time()
         
     def Aller1(self,_dir='n'):
         global time_btw_clics_min
@@ -179,5 +175,3 @@ class main(Lift):
                     self.target.insert(0,1)
                 else:
                     self.target.append(1)
-        else:
-            time_last_clic = time.time()

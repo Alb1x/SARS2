@@ -12,7 +12,6 @@ import glob
 import threading
 
 import settings
-start=time.time()
 
 
 
@@ -286,7 +285,7 @@ class Options:
         self.master = master
         self.master.title("Options")
         self.master.iconbitmap("opt.ico")
-        self.master.geometry("250x250+200+200")
+        self.master.geometry("250x250+200+300")
         self.master.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         
@@ -305,17 +304,64 @@ class Options:
         self.slide_t_v.pack()
         self.frame_portes.pack()
         self.frame_options.pack()
+        
+        #Si on simule le bug 3:
         if(len(sys.argv) >1):
             if sys.argv[1]=='3':
-                self.optionsBug3_1()
+                frame = tk.Frame(self.frame_options)
+                label = tk.Label(frame, text="Boutons à échanger :")
+                label.pack(side="top")
+                self.optionsBug3_1(frame)
+                self.optionsBug3_2(frame)
+                frame.pack(pady=10)
                 
+        #Si on simule le bug 4:
+        if(len(sys.argv) >1):
+            if sys.argv[1]=='4':
+                settings.n_bug='4'
+                frame = tk.Frame(self.frame_options)
+                self.optionsBug4(frame)
+                frame.pack(pady=10)
+                
+        #Si on simule le bug 5:
+        if(len(sys.argv) >1):
+            if sys.argv[1]=='5':
+                settings.n_bug='5'
+                frame = tk.Frame(self.frame_options)
+                self.optionsBug5(frame)
+                frame.pack(pady=10)
+        
     def on_closing(self):
+        self.master.destroy()
         settings.option_active = False
         
     def slide_valid(self):
         settings.t_att_po=self.slide_t_porte.get()
+        
+    def bug4_valid(self):
+        content = self.text_entry.get()
+        # if len(content)==1 and content.isdigit():
+        #     if int(content)>0 and int(content)<6:
+        #         settings.breakdown_button=content
+        #         self.texy_entry.select_clear()
+        if len(content)==2:
+            if content[0].isdigit() and int(content[0])>0 and int(content[0])<6 and (content[1]=='d'or content[1]=='u'):
+                if content=="1d" or content=="5u":
+                    self.text_entry.delete(0, "end")
+                    self.text_entry.insert(0,"INVALIDE")
+                else:
+                    settings.breakdown_button=content
+                    self.text_entry.delete(0, "end")
+            else:
+                self.text_entry.delete(0, "end")
+                self.text_entry.insert(0,"INVALIDE")
+        else :
+            self.text_entry.delete(0, "end")
+            self.text_entry.insert(0,"INVALIDE")
+            
+            
     
-    def optionsBug3_1(self):
+    def optionsBug3_1(self,frame):
         options = [
             "1",
             "2",
@@ -323,13 +369,52 @@ class Options:
             "4",
             "5",
         ]
-        
-        clicked = tk.StringVar()
-        clicked.set("1")
-        drop = tk.OptionMenu( self.master , clicked , *options )
-        drop.pack()
+        drop = tk.OptionMenu( frame , settings.etages_bug[0] , *options )
+        drop.pack(side="left")
     
-
+    def optionsBug3_2(self,frame):
+        options = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+        ]
+        drop = tk.OptionMenu( frame , settings.etages_bug[1] , *options )
+        drop.pack(side="right")
+        
+    def optionsBug4(self,frame):
+        settings.time_passed = tk.StringVar()
+        label = tk.Label(frame, textvar=settings.time_passed)
+        label.pack()
+        frame2 = tk.Frame(frame)
+        label2 = tk.Label(frame2, text="Bouton impacté :")
+        label2.pack(side="left")
+        self.text_entry = tk.Entry(frame2)
+        self.text_entry.pack(side="right")
+        frame2.pack()
+        validate_button = tk.Button(frame, text="Enregistrer", command=self.bug4_valid)
+        validate_button.pack()
+    
+    def optionsBug5(self,frame):
+        
+        label1 = tk.Label(frame, textvariable=settings.n_text)
+        label1.pack()
+        label2 = tk.Label(frame, text="Bouton impacté :")
+        label2.pack()
+        options = [
+            "1u",
+            "2u",
+            "2d",
+            "3u",
+            "3d",
+            "4u",
+            "4d",
+            "5d"
+        ]
+        drop = tk.OptionMenu( frame , settings.breakdown_iteration_button , *options )
+        drop.pack()
+        
         
     if(len(sys.argv) >1):
         if sys.argv[1]==3:

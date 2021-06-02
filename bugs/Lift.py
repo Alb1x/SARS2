@@ -3,6 +3,7 @@ sys.path.insert(0, '..')
 from notreAscenseur import *
 import settings
 import tkinter as tk
+
 class main:
     def __init__(self, master):
         self.master = master
@@ -23,6 +24,7 @@ class main:
         self.CreerElevator()
         self.CreerEtage()
         self.CreerMenuOptions()
+
 
         self.master.iconbitmap("elevator.ico")
 
@@ -275,9 +277,10 @@ class main:
             self.tempo_var.set("Tempo : "+str(self.CurTempo))
             self.tempop_var.set("Tempo portes : "+str(self.CurTempoPortes))
             self.target_var.set("Liste target : "+str(self.target))
-            if settings.option_active:
-                self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(settings.t_att_po))
-
+        if settings.option_active:
+            self.Options.t_porte_var.set("Temps d'ouverture des portes : "+str(settings.t_att_po))
+            if settings.n_bug=="4":
+                settings.time_passed.set("Temps passé / temps de vie = "+str(int(time.time()-settings.start))+"/"+str(int(settings.time_before_breakdown)))
 
         if self.CurEtage > 5:
             self.CurEtage=5
@@ -462,7 +465,7 @@ class main:
     def debug(self):
         self.debug_=1
         self.debugWindow = tk.Toplevel(self.master)
-        self.debugWindow.geometry("200x140")
+        self.debugWindow.geometry("200x140+220+100")
         self.debugWindow.title("Infos")
         self.debugWindow.iconbitmap("bug.ico")
         self.frame_debug= tk.Frame(self.debugWindow)

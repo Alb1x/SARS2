@@ -23,6 +23,9 @@ settings.n_text=n_text
 
 
 class main(Lift):
+    def custom_init(self):
+        self.description=description
+        
     def Aller5d(self):
         if settings.breakdown_iteration_button.get()=="5d":
             n.set(str(int(n.get())+1))

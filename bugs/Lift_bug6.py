@@ -16,7 +16,9 @@ time_btw_clics_min = 2
 time_last_clic = time.time()
 
 class main(Lift):
-    
+    def custom_init(self):
+        self.description=description
+        
     def Aller5(self,_dir='n'):
         # appel des variables globales
         global time_btw_clics_min

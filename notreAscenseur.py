@@ -24,7 +24,7 @@ class MyTimer:
         self._tempo = tempo
     
     def _run(self):
-        if settings.globstop :
+        if settings.globstop==1 :
             sys.exit()
             self.stop()
         self._timer = threading.Timer(self._tempo, self._run)

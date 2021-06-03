@@ -501,7 +501,7 @@ class main:
         settings.globstop= 1
 
     def sortir(self):
-        settings.globstop = 1
+        self.exit()
         sys.exit(1)
 
     def custom_init(self):

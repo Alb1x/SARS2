@@ -8,17 +8,13 @@ Ce programme simule les défaillances d'un ascenseur, afin d'y diagnostiquer les
 
 Pour lancer le programme, exécutez la commande suivante : 
 
-```python notreAscenseur.py 1```
+```python main.py ```
 
-afin de lancer la simulation avec le premier bug.
+Une interface graphique de démarrage permettra alors de choisir le bug désiré.
 
 ## Débogage
 
-Pour avoir les informations de débogage, utilisez le mot clé `debug` lors du lancement du script. 
-
-Exemple : 
-
-```python notreAscenseur.py 1 debug```
+Pour avoir les informations de débogage, cochez la case correspondante sur l'interface de démarrage.
 
 ## Description des bugs 
 
@@ -29,6 +25,12 @@ Exemple :
 |2|Ascenseur où le bouton <<>> ajoute du temps au compteur au lieu de RAZ.|
 |3|Ascenseur qui échange 2 boutons à l'extérieur de l'ascenseur|
 |4|Ascenseur dont le bouton choisi ne marche plus au bout d'un temps donné.|
+|5|Ascenseur où un bouton ne fonctionne plus après un certain nombre d'itérations|
+|6|Ascenseur ayant un intervalle minimum entre 2 appuis sur des boutons différents|
+
+## Paramétrage des bugs
+
+Lorsqu'un bug est lancé, il est possible d'en modifier les paramètres depuis le menu **Options** présent sur l'interface de l'Ascenseur.
 
 
 ## Auteurs 
